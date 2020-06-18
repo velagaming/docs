@@ -2,7 +2,9 @@
 tags: [Vela Gaming, Common Wallet]
 ---
 
-# Vela Gaming - Common Wallet
+![Diagram](../assets/images/vela_gaming/logo.jpg)
+
+# Common Wallet
 
 ## Overview
 
@@ -40,7 +42,7 @@ To be able to connect to our game server. **Operator (host)** needs to provide t
 
 ![Diagram](../assets/images/vela_gaming/game_launch_diagram.jpg)
 
-* * *
+---
 
 ## API Reference (Provider to Host)
 
@@ -125,7 +127,7 @@ title: Try It
 
 <!-- type: tab-end -->
 
-* * *
+---
 
 ## Game Play (Provider to Host)
 
@@ -136,7 +138,7 @@ A host wishes to integrate a **common wallet** to fund game play on a wager-by-w
 - [Refund Bet](#refund-ber)
 - [Bet and Win](#bet-and-win)
 
-* * *
+---
 
 ### Bet
 

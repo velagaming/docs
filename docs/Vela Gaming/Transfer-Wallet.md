@@ -2,7 +2,9 @@
 tags: [Vela Gaming, Transfer Wallet]
 ---
 
-# Vela Gaming - Transfer Wallet
+![Diagram](../assets/images/vela_gaming/logo.jpg)
+
+# Transfer Wallet
 
 ## Overview
 
