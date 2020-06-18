@@ -2,9 +2,9 @@
 tags: [Vela Gaming, Mobile App]
 ---
 
-![Vela Gaming](../assets/images/vela_gaming/logo.jpg)
+![Vela Gaming](../../assets/images/vela_gaming/logo.jpg)
 
-# Transfer Wallet
+# Mobile App
 
 ## Overview
 
@@ -35,7 +35,7 @@ To be able to connect to our game server. **Operator (host)** needs to provide t
 - If the player is not found in VG Game Server, VG Game Server will treat it as new player and register as a new player.
 - This method is called on launching the game for the logged-in player.
 
-![Diagram](../assets/images/vela_gaming/game_launch_diagram.jpg)
+![Diagram](../../assets/images/vela_gaming/game_launch_diagram.jpg)
 
 * * *
 
