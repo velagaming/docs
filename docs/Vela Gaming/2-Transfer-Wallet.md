@@ -2,7 +2,7 @@
 tags: [Vela Gaming, Transfer Wallet]
 ---
 
-![Diagram](../assets/images/vela_gaming/logo.jpg)
+![Vela Gaming](../assets/images/vela_gaming/logo.jpg)
 
 # Transfer Wallet
 
@@ -127,8 +127,10 @@ When a host wishes to use a separate account, the integration is done via a set 
 
 - [Create Player](#create-player)
 - [Get Balance](#get-balance)
-- [Deposit](#deposit)
-- [Withdraw](#withdraw)
+- [Deposit (Will be expired)](#deposit-will-be-expired)
+- [Deposit V2 (New)](#deposit-v2-new)
+- [Withdraw (Will be expired)](#withdraw-will-be-expired)
+- [Withdraw V2 (New)](#withdraw-v2-new)
 
 #### Error handling
 

@@ -2,7 +2,11 @@
 tags: [Vela Gaming, Common Wallet]
 ---
 
-![Diagram](../assets/images/vela_gaming/logo.jpg)
+## @@ -1,726 +0,0 @@
+
+## tags: [Vela Gaming, Common Wallet]
+
+![Vela Gaming](../assets/images/vela_gaming/logo.jpg)
 
 # Common Wallet
 
