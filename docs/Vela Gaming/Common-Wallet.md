@@ -2,7 +2,7 @@
 tags: [Vela Gaming, Common Wallet]
 ---
 
-# Vela Gaming - Transfer Wallet
+# Vela Gaming - Common Wallet
 
 ## Overview
 
