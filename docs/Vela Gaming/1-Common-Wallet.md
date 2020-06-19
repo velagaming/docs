@@ -525,7 +525,7 @@ title: Examples
           "cn": "蓝海龙王"
         },
         "game_code": "fish",
-        "url": "http://shoot-01.gii365.com"
+        "url": "http://shoot-01.velachip.com"
       }
     ]
   }

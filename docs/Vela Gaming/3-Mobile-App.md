@@ -127,10 +127,8 @@ When a host wishes to use a separate account, the integration is done via a set 
 - [Create Player](#create-player)
 - [Change Password](#change-password)
 - [Get Balance](#get-balance)
-- [Deposit (Will be expired)](#deposit-will-be-expired)
-- [Deposit V2 (New)](#deposit-v2-new)
-- [Withdraw (Will be expired)](#withdraw-will-be-expired)
-- [Withdraw V2 (New)](#withdraw-v2-new)
+- [Deposit](#deposit)
+- [Withdraw](#withdraw)
 - [Suspend](#suspend)
 - [Unsuspend](#unsuspend)
 
@@ -407,91 +405,7 @@ title: Try It
 
 <!-- type: tab-end -->
 
-### Deposit (Will be expired)
-
-For transferring funds into the player account, the deposit API call should be used.
-
-<!--
-type: tab
-title: Docs
--->
-
-### Request
-
-| Name      | Type   | Description                                          |
-| --------- | ------ | ---------------------------------------------------- |
-| host_id   | string | Unique ID of Host System (provided by game provider) |
-| member_id | string | Unique ID / Username of the player                   |
-| amount    | uint64 | Total **POINTS** to be transferred (in Cents)        |
-
-> If player's transfer amount is 1000 points, amount is 100000 (in Cents)
->
-> ##### Example
->
-> <http://{PROVIDER_API_SERVICE}/api/user/deposit?host_id={host_id}&member_id={member_id}&amount=10000>
-
-### Response
-
-| Name        | Type   | Description                                 |
-| ----------- | ------ | ------------------------------------------- |
-| status_code | int    | Response status code                        |
-| balance     | uint64 | Current **POINTS** of the player (in cents) |
-
-#### Status Code
-
-| Code | Description       |
-| ---- | ----------------- |
-| 0    | Success           |
-| 1    | Invalid Member ID |
-| 2    | Invalid Host ID   |
-
-<!--
-type: tab
-title: Examples
--->
-
-### Sample Success Response
-
-```json
-{
-  "data": {
-    "status_code": 0,
-    "balance": 100000
-  }
-}
-```
-
-### Sample Error Response
-
-```json
-{
-  "error": {
-    "status_code": 2,
-    "message": "Invalid Host ID"
-  }
-}
-```
-
-<!--
-type: tab
-title: Try It
--->
-
-```json http
-{
-  "method": "get",
-  "url": "https://{PROVIDER_API_SERVICE}/api/user/deposit",
-  "query": {
-    "host_id": "{host_id}",
-    "member_id": "{member_id}",
-    "amount": "10000"
-  }
-}
-```
-
-<!-- type: tab-end -->
-
-### Deposit V2 (New)
+### Deposit
 
 For transferring funds into the player account, the deposit API call should be used.
 
@@ -579,91 +493,7 @@ title: Try It
 
 <!-- type: tab-end -->
 
-### Withdraw (Will be expired)
-
-For transferring funds out of the player account, the withdraw API call should be used.
-
-<!--
-type: tab
-title: Docs
--->
-
-### Request
-
-| Name      | Type   | Description                                          |
-| --------- | ------ | ---------------------------------------------------- |
-| host_id   | string | Unique ID of Host System (provided by game provider) |
-| member_id | string | Unique ID / Username of the player                   |
-| amount    | uint64 | Total **POINTS** to be transferred (in Cents)        |
-
-> If player's transfer amount is 1000 points, amount is 100000 (in Cents)
->
-> ##### Example
->
-> <http://{PROVIDER_API_SERVICE}/api/user/withdraw?host_id={host_id}&member_id={member_id}&amount=10000>
-
-### Response
-
-| Name        | Type   | Description                                 |
-| ----------- | ------ | ------------------------------------------- |
-| status_code | int    | Response status code                        |
-| balance     | uint64 | Current **POINTS** of the player (in cents) |
-
-#### Status Code
-
-| Code | Description       |
-| ---- | ----------------- |
-| 0    | Success           |
-| 1    | Invalid Member ID |
-| 2    | Invalid Host ID   |
-
-<!--
-type: tab
-title: Examples
--->
-
-### Sample Success Response
-
-```json
-{
-  "data": {
-    "status_code": 0,
-    "balance": 100000
-  }
-}
-```
-
-### Sample Error Response
-
-```json
-{
-  "error": {
-    "status_code": 2,
-    "message": "Invalid Host ID"
-  }
-}
-```
-
-<!--
-type: tab
-title: Try It
--->
-
-```json http
-{
-  "method": "get",
-  "url": "https://{PROVIDER_API_SERVICE}/api/user/withdraw",
-  "query": {
-    "host_id": "{host_id}",
-    "member_id": "{member_id}",
-    "amount": "10000"
-  }
-}
-```
-
-<!-- type: tab-end -->
-
-### Withdraw V2 (New)
+### Withdraw
 
 For transferring funds out of the player account, the withdraw API call should be used.
 
@@ -967,7 +797,7 @@ title: Examples
           "cn": "蓝海龙王"
         },
         "game_code": "fish",
-        "url": "http://shoot-01.gii365.com"
+        "url": "http://shoot-01.velachip.com"
       }
     ]
   }
