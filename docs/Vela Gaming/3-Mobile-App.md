@@ -40,7 +40,7 @@ To be able to connect to our game server, **operator** needs to provide the foll
 - [Game Launch](#game-launch)
 - [User Report](#user-report)
 
-**(O) is referred to API that is requre to be develop by operator.
+**(O) is referred to API that is require to be develop by operator.
 
 ### Game Launch Process
 
