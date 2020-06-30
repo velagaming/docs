@@ -120,7 +120,7 @@ title: Try It
 ```json http
 {
   "method": "get",
-  "url": "http://{OPERATOR_API_ENDPOINT}/api/users/authenticate",
+  "url": "https://{OPERATOR_API_ENDPOINT}/api/users/authenticate",
   "query": {
     "access_token": "{access_token}",
     "game_code": "fish"
@@ -154,7 +154,7 @@ title: Docs
 
 > ##### Example
 >
-> <http://{OPERATOR_API_ENDPOINT}/api/bet?access_token={access_token}&ticket_id={ticket_id}&total_bet={total_bet}&key={key}&game_code={game_code}>
+> <https://{OPERATOR_API_ENDPOINT}/api/bet?access_token={access_token}&ticket_id={ticket_id}&total_bet={total_bet}&key={key}&game_code={game_code}>
 
 ### Response
 
@@ -237,7 +237,7 @@ title: Docs
 
 > ##### Example
 >
-> <http://{OPERATOR_API_ENDPOINT}/api/result?access_token={access_token}&ticket_id={ticket_id}&total_win={total_win}&game_code={game_code}>
+> <https://{OPERATOR_API_ENDPOINT}/api/result?access_token={access_token}&ticket_id={ticket_id}&total_win={total_win}&game_code={game_code}>
 
 ### Response
 
@@ -316,7 +316,7 @@ title: Docs
 
 > ##### Example
 >
-> <http://{OPERATOR_API_ENDPOINT}/api/refund?access_token={access_token}&ticket_id={ticket_id}&game_code={game_code}>
+> <https://{OPERATOR_API_ENDPOINT}/api/refund?access_token={access_token}&ticket_id={ticket_id}&game_code={game_code}>
 
 ### Response
 
@@ -396,7 +396,7 @@ title: Docs
 
 > ##### Example
 >
-> <http://{OPERATOR_API_ENDPOINT}/api/betwin?access_token={access_token}&ticket_id={ticket_id}&total_bet={total_bet}&total_win={total_win}&game_code={game_code}>
+> <https://{OPERATOR_API_ENDPOINT}/api/betwin?access_token={access_token}&ticket_id={ticket_id}&total_bet={total_bet}&total_win={total_win}&game_code={game_code}>
 
 ### Response
 
@@ -475,7 +475,7 @@ title: Docs
 
 > ##### Example
 >
-> <http://{PROVIDER_API_ENDPOINT}/api/user/gamelist?host_id={host_id}>
+> <https://{PROVIDER_API_ENDPOINT}/api/user/gamelist?host_id={host_id}>
 
 ### Response
 
@@ -509,8 +509,10 @@ title: Examples
           "en": "Blue Ocean",
           "cn": "蓝海龙王"
         },
+        "game_id": "shoot-01",
         "game_code": "fish",
-        "url": "http://shoot-01.velachip.com"
+        "lobby_group": "shooting",
+        "url": "https://shoot-01.velachip.com"
       }
     ]
   }
@@ -569,7 +571,7 @@ title: Docs
 >
 > ##### Example
 >
-> <http://{GAME_URL}?host_id={host_id}&access_token={access_token}&mode=singleplayer&lang=ch&allow_vertical=1>
+> <https://{GAME_URL}?host_id={host_id}&access_token={access_token}&mode=singleplayer&lang=ch&allow_vertical=1>
 
 <!-- type: tab-end -->
 
@@ -593,7 +595,7 @@ title: Docs
 >
 > ##### Example
 >
-> <http://{PROVIDER_API_ENDPOINT}/api/report?host_id={host_id}&key={key}>
+> <https://{PROVIDER_API_ENDPOINT}/api/report?host_id={host_id}&key={key}>
 
 ### Response
 
@@ -644,39 +646,35 @@ title: Examples
     "status_code": 0,
     "report": [
       {
-        "id": "355005",
-        "ticket_id": "11756",
-        "game_code": "zodiac2",
-        "game_group": "zodiac",
+        "id": "4",
+        "ticket_id": "2192",
+        "game_code": "fish",
+        "code": "fish",
+        "game_group": "action",
         "username": "demo04",
-        "bet_stake": 200,
+        "bet_stake": 10000,
         "commission": 0,
         "bet_info": {
-          "bet_type": "small",
-          "bet_category": "big_small"
+          "room_type": "room x1"
         },
         "result_info": {
-          "bet_result": "lose",
-          "result": {
-            "zodiac": "z9",
-            "big_small": "big",
-            "black_red": "black",
-            "odd_even": "even"
-          }
+          "total_bullet_cost": 3,
+          "total_fish_payout": 0
         },
-        "payout_amount": 0,
+        "payout_amount": 9997,
         "gain_amount": 0,
-        "loss_amount": 200,
+        "loss_amount": 3,
         "draw_amount": 0,
         "cancel_amount": 0,
         "reject_amount": 0,
         "data": null,
         "status": "done",
         "remark": null,
-        "report_date": "2017-03-29 14:40:32"
+        "report_date": "2017-07-31 17:38:10"
       }
     ],
-    "key": "355005"
+    "key": "13",
+    "version_key": "13"
   }
 }
 ```
