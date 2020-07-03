@@ -16,7 +16,6 @@ This document describes the service integration between **Gaming (provider)** an
 - **Operator** - Referred as the operator
 - **Provider** - Referred as the game provider
 - **Host ID** - This Host ID is an unique token generated from game provider for each game operator
-- **Points** - Referred as the game points; not player's actual wallet balance.
 - The operator manages the user account database (personal information, coin balance, etc.)
 - The provider only manages the player data necessary to perform game operation.
 - All methods support uses **HTTPS GET** verb in the system.
