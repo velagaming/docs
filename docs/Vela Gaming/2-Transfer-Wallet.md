@@ -119,7 +119,7 @@ title: Try It
 ```json http
 {
   "method": "get",
-  "url": "https://{OPERATOR_API_ENDPOINT}/api/users/authenticate",
+  "url": "https://{OPERATOR_API_ENDPOINT}/api/user/authenticate",
   "query": {
     "access_token": "{access_token}",
     "game_code": "fish"
