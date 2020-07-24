@@ -76,6 +76,7 @@ title: Docs
 | coin_balance    | int    | Number of games to be played for this session.                                                                                                  |
 | expected_result | int    | Total score to be gain by the player <br> **expected_result** must fall between **min_score \* coin_balance** and **max_score \* coin_balance** |
 | currency        | string | Currency of thee player. <br> \*\*Please return a fixed value "COIN"                                                                            |
+| return_url      | string | Redirect to specific url after game finished. Button will not appear if url is empty.                                                                  |
 
 #### Status Code
 
@@ -97,7 +98,8 @@ title: Examples
   "member_id": "demo01",
   "expected_result": 375,
   "coin_balance": 10,
-  "currency": "COIN"
+  "currency": "COIN",
+  "return_url": "www.google.com"
 }
 ```
 
