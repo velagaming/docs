@@ -4,95 +4,126 @@ tags: [Vela Gaming, Transfer Wallet]
 
 ![Vela Gaming](../../assets/images/vela_gaming/logo.jpg)
 
-# Transfer Wallet
+# Transfer Wallet 游戏供应商的钱包
 
-## Overview
+## Overview 概述 
 
-This document describes the service integration between **Gaming (provider)** and an **operator**. The following chapters describe the general concept of integration as well as descriptions and examples of the API methods used for the service integration.
+This document describes the service integration between **Gaming (provider)** and an **operator**. The following chapters describe the general concept of integration as well as descriptions and examples of the API methods used for the service integration.<b>
+文档介绍了游戏供应商和对接第三方之间的技术接口细节。以下描述了游戏和第三方的一般概念，以及运用接口的描述和示例。 
 
-### General Notes
+### General Notes 一般注意事项 
 
-- Data Format: JSON (JavaScript Object Notation)
+- Data Format : JSON (JavaScript Object Notation)
+- 数据格式: JSON (JavaScript Object Notation) 
+<br>
 - Wallet Option: Separate Wallet
+- 电子钱包选项 : 游戏供应商的钱包
+<br>
 - **Operator** - Referred as the operator
+- **第三方** - 被称为运营商或第三方 
+<br>
 - **Provider** - Referred as the game provider
+- **游戏供应商** - 被称为游戏供应商 
+<br>
 - **Host ID** - This Host ID is an unique token generated from game provider for each game operator
+- **Host ID** - Host ID是游戏供应商为每个第三方提供的唯一令牌
+<br>
 - **Points** - Referred as the game points; not player's actual wallet balance.
-- The operator manages the user account database (personal information, balance, wallet operations, etc.)
-- The Provider only manages the player data necessary to perform game operation.
+- **Points** - Points是游戏点数；不是玩家的实际钱包余额.
+<br>
+- The provider manages the user account database (personal information, balance, wallet operations, etc.)
+- 游戏供应商管理用户帐户数据库(个人资料, 余额, 钱包操作等.)
+<br>
 - All methods support uses **HTTPS GET** verb in the system.
+- 全部请求内容必须使用 **HTTPS GET** 调用 
+<br>
 - Players perform all betting and gaming by using VG Game Server's wallet system. Therefore, **operator** need to integrate VG API.
-- Funds are deposited and witdrawn to the game provider with API calls.
+- 玩家使用VG Game Server的钱包系统执行所有投注和游戏。 因此，第三方需要连接VG API。
+<br>
+- Funds are deposited and withdrawn to the game provider with API calls.
+- 资金会通过API调用存款和取款到游戏供应商。
 
-### Getting started
 
-To be able to connect to our game server, **operator** needs to provide the following API for us to communicate between game server and operator site. Players perform all betting and gaming by using VG Game Server's wallet system.
 
-- [Authenticate (O)](#authenticate)
-- [Create Player](#create-player)
-- [Get Balance](#get-balance)
-- [Deposit](#deposit)
-- [Withdraw](#withdraw)
-- [Game List](#game-list)
-- [Game Launch](#game-launch)
-- [User Report](#user-report)
+### Getting started 游戏接入规范
 
-**(O) is referred to API that is required to be develop by operator.
+To be able to connect to our game server, **operator** needs to provide the following API for us to communicate between game server and operator site. Players perform all betting and gaming by using VG Game Server's wallet system.<b>
+为了能够连接到我们的VG游戏服务器。 第三方需要提供以下API给我们在游戏服务器和第三方之间进行链接。玩家使用VG Game Server的钱包系统执行所有投注和游戏。
 
-### Game Launch Process
+- [Authenticate 认证 (O)](#authenticate-认证)
+- [Create Player 创建玩家](#create-player-创建玩家)
+- [Get Balance 获取玩家余额](#get-balance-获取玩家余额)
+- [Deposit 存款](#deposit-存款)
+- [Withdraw 取款](#withdraw-取款)
+- [Game List 游戏列表](#game-list-游戏列表)
+- [Game Launch 游戏启动](#game-launch-游戏启动)
+- [User Report 玩家报表](#user-report-玩家报表)
 
-- When a player launches the game, it will call the **Operator's Authenticate** API.
+\*\*(O) is referred to API that is required to be develop by operator. <b> \*\*(O) 是指第三方必须开发的API。
+
+
+### Game Launch Process 游戏启动流程 
+
+- When a player launches the game, it will call the operator's **Authenticate** API.
+- 当玩家启动游戏时，将调用第三方 **Authenticate** API.
+<br>
 - Operator needs to provide us the **Authenticate** API.
+- 第三方需要向我们提供 **Authenticate** API。 
+<br>
 - The **Authenticate** API is used by VG Game Server to retrieve players' information from the operator.
-- Authenticate API is called upon launching the game for the logged-in player.
+- VG 游戏服务器使用 **Authenticate** API 来检索第三方玩家的信息 
+<br>
+- **Authenticate** API is called upon launching the game for the logged-in player.
+- 已登录玩家启动游戏时会调用**Authenticate** API。
 
 ![Diagram](../../assets/images/vela_gaming/game_launch_diagram.jpg)
 
 ---
 
-## API
+## API 游戏程序接口参考 
 
-### Authenticate
+### Authenticate 认证
 
-Authenticate API is called upon launching the game for the logged-in player. **Operator needs to implement this API for user verification**.
+Authenticate API is called upon launching the game for the logged-in player. **Operator needs to implement this API for user verification**.<b>
+已登录玩家启动游戏时会调用**Authenticate** API。第三方需要实施此API进行用户验证。
 
 <!--
 type: tab
-title: Docs
+title: Docs 文件
 -->
 
-### Request
+### Request 请求
 
-| Name         | Type   | Description                                                                    |
+| Name 名称    | Type 类型   | Description 介绍                                                                     |
 | ------------ | ------ | ------------------------------------------------------------------------------ |
-| access_token | string | The access token is generated by operator system for the player’s session. |
-| game_code    | string | Game code is referred to [Game List](#game-list) API                                                                      |
+| access_token | string | The access token is generated by operator system for the player's session.<b>玩家在第三方系统内的访问令牌  |
+| game_code    | string | Game code is referred to [Game List](#game-list-游戏列表) API<b>游戏代码可参考[游戏列表](#game-list-游戏列表)API                                                                  |
 
-> ##### Example
+> ##### Example 例子
 >
 > https://{OPERATOR_API_ENDPOINT}/api/user/authenticate?access_token={access_token}&game_code=fish
 
-### Response
+### Response 响应
 
-| Name        | Type   | Description             |
+| Name 名称   | Type 类型   | Description 介绍              |
 | ----------- | ------ | ----------------------- |
-| status_code | int    | Response status code    |
-| member_id   | string | Unique ID of the player |
-| currency    | string | Currency code is referred to ISO 4217           |
+| status_code | int    | Response status code<b>响应状态代码    |
+| member_id   | string | Unique ID of the player<b>玩家唯一ID |
+| currency    | string | Currency code is referred to ISO 4217<b>货币代码可参考ISO 4217           |
 
-#### Status Code
+#### Status Code 状态代码
 
-| Code | Description   |
+| Code 代码 | Description 介绍    |
 | ---- | ------------- |
-| 0    | Success       |
-| 1    | Invalid Token |
+| 0    | Success<b>成功       |
+| 1    | Invalid Token<b>访问令牌无效 |
 
 <!--
 type: tab
-title: Examples
+title: Examples 例子
 -->
 
-### Sample Success Response
+### Sample Success Response 成功响应例子 
 
 ```json
 {
@@ -102,7 +133,7 @@ title: Examples
 }
 ```
 
-### Sample Error Response
+### Sample Error Response 错误响应例子 
 
 ```json
 {
@@ -113,7 +144,7 @@ title: Examples
 
 <!--
 type: tab
-title: Try It
+title: Try It 尝试
 -->
 
 ```json http
@@ -131,49 +162,50 @@ title: Try It
 
 ---
 
-### Create Player
+### Create Player 创建玩家 
 
-To create a new player account, the create player API is called.
+To create a new player account, the create player API is called.<b>要创建新的玩家帐户，将调用创建玩家API。
+
 
 <!--
 type: tab
-title: Docs
+title: Docs 文件
 -->
 
-### Request
+### Request 请求
 
-| Name      | Type   | Description                                          |
+| Name 名称 | Type 类型   | Description 介绍                                           |
 | --------- | ------ | ---------------------------------------------------- |
-| host_id   | string | Unique ID of Operator System (provided by game provider) |
-| member_id | string | Unique ID / Username of the player                   |
-| currency  | string | Currency code is referred to ISO 4217                              |
+| host_id   | string | Unique ID of Operator System (provided by game provider)<b>第三方的 Host ID (游戏供应商提供) |
+| member_id | string | Unique ID / Username of the player<b>玩家用户名/唯一ID                   |
+| currency  | string | Currency code is referred to ISO 4217<b>货币代码可参考ISO 4217                              |
 
-> ##### Example
+> ##### Example 例子
 >
 > https://{PROVIDER_API_ENDPOINT}/api/user/create?host_id={host_id}&member_id={member_id}&currency=MYR
 
-### Response
+### Response 响应
 
-| Name        | Type   | Description                                 |
+| Name 名称   | Type 类型   | Description 介绍                                  |
 | ----------- | ------ | ------------------------------------------- |
-| status_code | int    | Response status code                        |
-| balance     | uint64 | Current **POINTS** of the player (in cents) |
+| status_code | int    | Response status code<b>响应状态代码                        |
+| balance     | uint64 | Current **POINTS** of the player (in cents)<b>玩家点数 (进位两位数，分钱)|
 
-#### Status Code
+#### Status Code 状态代码
 
-| Code | Description       |
+| Code 代码 | Description 介绍        |
 | ---- | ----------------- |
-| 0    | Success           |
-| 1    | Invalid Member ID |
-| 2    | Invalid Host ID   |
-| 3    | Invalid Currency  |
+| 0    | Success<b>成功           |
+| 1    | Invalid Member ID<b>玩家账号无效  |
+| 2    | Invalid Host ID<b>Host ID 无效    |
+| 3    | Invalid Currency<b>货币代码无效   |
 
 <!--
 type: tab
-title: Examples
+title: Examples 例子
 -->
 
-### Sample Success Response
+### Sample Success Response 成功响应例子
 
 ```json
 {
@@ -184,7 +216,7 @@ title: Examples
 }
 ```
 
-### Sample Error Response
+### Sample Error Response 错误响应例子
 
 ```json
 {
@@ -197,7 +229,7 @@ title: Examples
 
 <!--
 type: tab
-title: Try It
+title: Try It 尝试
 -->
 
 ```json http
@@ -214,47 +246,47 @@ title: Try It
 
 <!-- type: tab-end -->
 
-### Get Balance
+### Get Balance 获取玩家余额
 
-To query the balance of a particular player account, the get balance API is called.
+To query the balance of a particular player account, the get balance API is called.<b>要查询特定玩家帐户的余额，将调用获取玩家余额API。
 
 <!--
 type: tab
-title: Docs
+title: Docs 文件
 -->
 
-### Request
+### Request 请求
 
-| Name      | Type   | Description                                          |
+| Name 名称 | Type 类型   | Description 介绍                                           |
 | --------- | ------ | ---------------------------------------------------- |
-| host_id   | string | Unique ID of Operator System (provided by game provider) |
-| member_id | string | Unique ID / Username of the player                   |
+| host_id   | string | Unique ID of Operator System (provided by game provider)<b>第三方的 Host ID (游戏供应商提供) |
+| member_id | string | Unique ID / Username of the player<b>玩家用户名/唯一ID                   |
 
-> ##### Example
+> ##### Example 例子
 >
 > https://{PROVIDER_API_ENDPOINT}/api/user/balance?host_id={host_id}&member_id={member_id}
 
-### Response
+### Response 响应
 
-| Name        | Type   | Description                                 |
+| Name 名称   | Type 类型   | Description 介绍                                  |
 | ----------- | ------ | ------------------------------------------- |
-| status_code | int    | Response status code                        |
-| balance     | uint64 | Current **POINTS** of the player (in cents) |
+| status_code | int    | Response Status Code<b>响应状态代码                        |
+| balance     | uint64 | Current **POINTS** of the player (in cents)<b>玩家点数 (进位两位数，分钱) |
 
-#### Status Code
+#### Status Code 状态代码
 
-| Code | Description       |
+| Code 代码 | Description 介绍        |
 | ---- | ----------------- |
-| 0    | Success           |
-| 1    | Invalid Member ID |
-| 2    | Invalid Host ID   |
+| 0    | Success<b>成功           |
+| 1    | Invalid Member ID<b>玩家账号无效 |
+| 2    | Invalid Host ID<b>Host ID 无效   |
 
 <!--
 type: tab
-title: Examples
+title: Examples 例子
 -->
 
-### Sample Success Response
+### Sample Success Response 成功响应例子
 
 ```json
 {
@@ -265,7 +297,7 @@ title: Examples
 }
 ```
 
-### Sample Error Response
+### Sample Error Response 错误响应例子
 
 ```json
 {
@@ -278,7 +310,7 @@ title: Examples
 
 <!--
 type: tab
-title: Try It
+title: Try It 尝试
 -->
 
 ```json http
@@ -294,53 +326,53 @@ title: Try It
 
 <!-- type: tab-end -->
 
-### Deposit
+### Deposit 存款
 
-To transfer funds into the player account, the deposit API is called.
+To transfer funds into the player account, the deposit API is called.<b>要将资金转入玩家帐户，将调用存款API。
 
 <!--
 type: tab
-title: Docs
+title: Docs 文件
 -->
 
-### Request
+### Request 请求
 
-| Name      | Type       | Description                                          |
+| Name 名称 | Type 类型       | Description 介绍                                           |
 | --------- | ---------- | ---------------------------------------------------- |
-| host_id   | string     | Unique ID of Operator System (provided by game provider) |
-| member_id | string     | Unique ID / Username of the player                   |
-| amount    | uint64     | Total **POINTS** to be transferred (in Cents)        |
-| transid   | string(52) | Unique transaction ID from operator                  |
+| host_id   | string     | Unique ID of Operator System (provided by game provider)<b>第三方的 Host ID (游戏供应商提供) |
+| member_id | string     | Unique ID / Username of the player<b>玩家用户名/唯一ID                   |
+| amount    | uint64     | Total **POINTS** to be transferred (in Cents)<b>要转让的总点数 （进位两位数，分钱）         |
+| transid   | string(52) | Unique transaction ID from operator<b>第三方的 Transaction ID                   |
 
-> If player's transfer amount is 1000 points, amount is 100000 (in Cents)
+> If player's transfer amount is 1000 points, amount is 100000 (in Cents)<b>如果玩家的转入游戏分数是1000分，amount要是100000(分钱) 
 
-> ##### Example
+> ##### Example 例子
 >
 > https://{PROVIDER_API_ENDPOINT}/api/user/deposit-v2?host_id={host_id}&member_id={member_id}&amount=10000
 
-### Response
+### Response 响应
 
-| Name        | Type   | Description                                 |
+| Name 名称   | Type 类型   | Description 介绍                                  |
 | ----------- | ------ | ------------------------------------------- |
-| status_code | int    | Response status code                        |
-| balance     | uint64 | Current **POINTS** of the player (in cents) |
+| status_code | int    | Response status code<b>响应状态代码                        |
+| balance     | uint64 | Current **POINTS** of the player (in cents)<b>玩家点数 (进位两位数，分钱) |
 
-#### Status Code
+#### Status Code 状态代码
 
-| Code | Description                |
+| Code 代码 | Description 介绍                 |
 | ---- | -------------------------- |
-| 0    | Success                    |
-| 1    | Invalid Member ID          |
-| 2    | Invalid Host ID            |
-| 5    | Invalid transid            |
-| 6    | This transid has been used |
+| 0    | Success<b>成功                    |
+| 1    | Invalid Member ID<b>玩家账号无效          |
+| 2    | Invalid Host ID<b>Host ID 无效            |
+| 5    | Invalid transid<b>Transaction ID 无效            |
+| 6    | This transid has been used<b>这 Transaction ID 已被用过  |
 
 <!--
 type: tab
-title: Examples
+title: Examples 例子
 -->
 
-### Sample Success Response
+### Sample Success Response 成功响应例子
 
 ```json
 {
@@ -351,7 +383,7 @@ title: Examples
 }
 ```
 
-### Sample Error Response
+### Sample Error Response 错误响应例子
 
 ```json
 {
@@ -364,7 +396,7 @@ title: Examples
 
 <!--
 type: tab
-title: Try It
+title: Try It 尝试
 -->
 
 ```json http
@@ -382,53 +414,54 @@ title: Try It
 
 <!-- type: tab-end -->
 
-### Withdraw
+### Withdraw 取款
 
-To transfer funds out of the player account, the withdraw API is called.
+To transfer funds out of the player account, the withdraw API is called.<b>要将资金转出玩家帐户，将调用取款API。
+
 
 <!--
 type: tab
-title: Docs
+title: Docs 文件
 -->
 
-### Request
+### Request 请求
 
-| Name      | Type       | Description                                          |
+| Name 名称 | Type 类型       | Description 介绍                                           |
 | --------- | ---------- | ---------------------------------------------------- |
-| host_id   | string     | Unique ID of Operator System (provided by game provider) |
-| member_id | string     | Unique ID / Username of the player                   |
-| amount    | uint64     | Total **POINTS** to be transferred (in Cents)        |
-| transid   | string(52) | Unique transaction ID from operator                  |
+| host_id   | string     | Unique ID of Operator System (provided by game provider)<b>第三方的 Host ID (游戏供应商提供) |
+| member_id | string     | Unique ID / Username of the player<b>玩家用户名/唯一ID                   |
+| amount    | uint64     | Total **POINTS** to be transferred (in Cents)<b>要转让的总点数 （进位两位数，分钱）        |
+| transid   | string(52) | Unique transaction ID from operator<b>第三方的 Transaction ID                  |
 
-> If player's transfer amount is 1000 points, amount is 100000 (in Cents)
+> If player's transfer amount is 1000 points, amount is 100000 (in Cents)<b>如果玩家的转入游戏分数是1000分，amount要是100000(分钱)
 
-> ##### Example
+> ##### Example 例子
 >
 > https://{PROVIDER_API_ENDPOINT}/api/user/withdraw-v2?host_id={host_id}&member_id={member_id}&amount=10000&transid={transid}
 
-### Response
+### Response 响应
 
-| Name        | Type   | Description                                 |
+| Name 名称   | Type 类型   | Description 介绍                                  |
 | ----------- | ------ | ------------------------------------------- |
-| status_code | int    | Response status code                        |
-| balance     | uint64 | Current **POINTS** of the player (in cents) |
+| status_code | int    | Response status code<b>响应状态代码                        |
+| balance     | uint64 | Current **POINTS** of the player (in cents)<b>玩家点数 (进位两位数，分钱) |
 
-#### Status Code
+#### Status Code 状态代码
 
-| Code | Description                |
+| Code 代码 | Description 介绍                 |
 | ---- | -------------------------- |
-| 0    | Success                    |
-| 1    | Invalid Member ID          |
-| 2    | Invalid Host ID            |
-| 5    | Invalid transid            |
-| 6    | This transid has been used |
+| 0    | Success<b>成功                    |
+| 1    | Invalid Member ID<b>玩家账号无效          |
+| 2    | Invalid Host ID<b>Host ID 无效            |
+| 5    | Invalid transid<b>Transaction ID 无效            |
+| 6    | This transid has been used<b>这 Transaction ID 已被用过 |
 
 <!--
 type: tab
-title: Examples
+title: Examples 例子
 -->
 
-### Sample Success Response
+### Sample Success Response 成功响应例子
 
 ```json
 {
@@ -439,7 +472,7 @@ title: Examples
 }
 ```
 
-### Sample Error Response
+### Sample Error Response 错误响应例子
 
 ```json
 {
@@ -452,7 +485,7 @@ title: Examples
 
 <!--
 type: tab
-title: Try It
+title: Try It 尝试
 -->
 
 ```json http
@@ -470,46 +503,46 @@ title: Try It
 
 <!-- type: tab-end -->
 
-## Game List
+## Game List 游戏列表
 
-This api will return game list to operator.
+This api will return game list to operator.<b>这API将游戏列表返回给第三方
 
 <!--
 type: tab
-title: Docs
+title: Docs 文件
 -->
 
-### Request
+### Request 请求
 
-| Name    | Type   | Description                                          |
+| Name 名称| Type 类型   | Description 介绍                                           |
 | ------- | ------ | ---------------------------------------------------- |
-| host_id | string | Unique ID of Operator System (provided by game provider) |
+| host_id | string | Unique ID of Operator System (provided by game provider)<b>第三方的 Host ID (游戏供应商提供) |
 
-> ##### Example
+> ##### Example 例子
 >
 > <https://{PROVIDER_API_ENDPOINT}/api/user/gamelist?host_id={host_id}>
 
-### Response
+### Response 响应
 
-| Name        | Type  | Description          |
+| Name 名称   | Type 类型  | Description 介绍           |
 | ----------- | ----- | -------------------- |
-| status_code | int   | Response status code |
-| list        | array | A list of game list  |
+| status_code | int   | Response status code<b>响应状态代码 |
+| list        | array | A list of game list<b>游戏列表  |
 
-#### Status Code
+#### Status Code 状态代码
 
-| Code | Description                    |
+| Code 代码 | Description 介绍                     |
 | ---- | ------------------------------ |
-| 0    | Success                        |
-| 2    | Invalid Host ID                |
-| 2001 | Required field cannot be empty |
+| 0    | Success<b>成功                        |
+| 2    | Invalid Host ID<b>Host ID 无效                |
+| 2001 | Required field cannot be empty<b>必填字段不能为空  |
 
 <!--
 type: tab
-title: Examples
+title: Examples 例子
 -->
 
-### Sample Success Response
+### Sample Success Response 成功响应例子
 
 ```json
 {
@@ -531,7 +564,7 @@ title: Examples
 }
 ```
 
-### Sample Error Response
+### Sample Error Response 错误响应例子
 
 ```json
 {
@@ -545,7 +578,7 @@ title: Examples
 
 <!--
 type: tab
-title: Try It
+title: Try It 尝试
 -->
 
 ```json http
@@ -560,76 +593,77 @@ title: Try It
 
 <!-- type: tab-end -->
 
-## Game Launch
+## Game Launch 游戏启动
 
-For launching games, please refer to the URL parameters as below. The game URL is referred to [Game List](#game-list) reponse.
+For launching games, please refer to the URL parameters as below. The game URL is referred to [Game List](#game-list-游戏列表) response.<b>要启动游戏，请参考以下URL参数.游戏URL可参考[游戏列表](#game-list-游戏列表)响应
 
 <!--
 type: tab
-title: Docs
+title: Docs 文件
 -->
 
-### Request
+### Request 请求
 
-| Name           | Type   | Description                                                                         |
+| Name 名称      | Type 类型   | Description 介绍                                                                          |
 | -------------- | ------ | ----------------------------------------------------------------------------------- |
-| host_id        | string | Unique ID of Operator System (provided by game provider)                                |
-| access_token   | string | The access token is generated by operator system for the player's session.      |
-| mode           | string | Game mode <br> (singleplayer, multiplayer) <br> \*\*only required for action game   |
-| lang           | string | Language of the game (ch, en) <br> Default language is en                           |
-| allow_vertical | int    | Default is 1 <br> 0 - landscape mode <br> 1 - allow vertical mode and landscap mode |
+| host_id        | string | Unique ID of Operator System (provided by game provider)<b>第三方的 Host ID (游戏供应商提供)                                |
+| access_token   | string | The access token is generated by operator system for the player's session.<b>玩家在第三方系统内的访问令牌.      |
+| mode           | string | Game mode<b>游戏模式 <br> (singleplayer, multiplayer)<b>(单机版或多人版 ) <br> \*\*only required for action game<b>\*\*只适于射击游戏   |
+| lang           | string | Language of the game (ch, en)<b>游戏语言(ch, en) <br> Default language is en<b>默认语言是en                           |
+| allow_vertical | int    | Default is 1<b>默认是1 <br> 0 - landscape mode<b>0 - 横向模式 <br> 1 - allow vertical mode and landscap mode<b>1 - 允许垂直模式和横向模式 |
 
-> If host_id and access_token is not provided, it is treated as **Guest** mode.
+> If host_id and access_token is not provided, it is treated as **Guest** mode.<b>如果没有提供host_id和access_token，将会被视为游客模式 
 
-> ##### Example
+> ##### Example 例子
 >
 > https://{GAME_URL}?host_id={host_id}&access_token={access_token}&mode=singleplayer&lang=ch&allow_vertical=1
 
 <!-- type: tab-end -->
 
-## User Report
+## User Report 玩家报表 
 
-This API is to get the games report from Game Server. **Operator** must maintain the key to keep track log request. For the first time to request log, key = 0. The response return the key value to **operator** for the next log request.
+This API is to get the games report from Game Server. **Operator** must maintain the key to keep track log request. For the first time to request log, key = 0. The response return the key value to **operator** for the next log request.<b>游戏供应商内的游戏数据报表，第三方可用此接口获得数据。玩家报表会根据 第三方所返回的据库索引号 来寻找数据
+
 
 <!--
 type: tab
-title: Docs
+title: Docs 文件
 -->
 
-### Request
+### Request 请求
 
-| Name    | Type   | Description                                          |
+| Name 名称| Type 类型   | Description 介绍                                           |
 | ------- | ------ | ---------------------------------------------------- |
-| host_id | string | Unique ID of Operator System (provided by game provider) |
-| key     | string | Unique database index number                         |
+| host_id | string | Unique ID of Operator System (provided by game provider)<b>第三方的 Host ID (游戏供应商提供) |
+| key     | string | Unique database index number<b>数据库索引号                          |
 
-> If key is empty, it will return data from index zero (0).
+> If key is empty, it will return data from index zero (0).<b>如果没有提供数据库索引号，供数据库索引号将会被视为初始值为 0 
 
-> ##### Example
+> ##### Example 例子
 >
 > https://{PROVIDER_API_ENDPOINT}/api/report?host_id={host_id}&key={key}
 
-### Response
+### Response 响应
 
-| Name        | Type  | Description          |
+| Name 名称   | Type 类型  | Description 介绍           |
 | ----------- | ----- | -------------------- |
-| status_code | int   | Response status code |
-| report      | array | A list report        |
+| status_code | int   | Response status code<b>响应状态代码 |
+| report      | array | A list report<b>报表列表        |
 
-#### Status Code
+#### Status Code 状态代码
 
-| Code | Description     |
+| Code 代码 | Description 介绍      |
 | ---- | --------------- |
-| 0    | Success         |
-| 2    | Invalid Host ID |
+| 0    | Success<b>成功         |
+| 2    | Invalid Host ID<b>Host ID 无效 |
 
-#### Report
+#### Report 报表
 
-| Name          | Type   | Description     |
+| Name 名称     | Type 类型   | Description 介绍      |
 | ------------- | ------ | --------------- |
 | id            | int    | Id              |
 | ticket_id     | int    | Ticket Id       |
-| game_code     | string | Game code is referred to [Game List](#game-list) API       |
+| game_code     | string | Game code is referred to [Game List](#game-list-游戏列表) API       |
 | game_group    | string | Game group      |
 | username      | string | Player username |
 | bet_stake     | double | Bet stake       |
@@ -647,10 +681,10 @@ title: Docs
 
 <!--
 type: tab
-title: Examples
+title: Examples 例子
 -->
 
-### Sample Success Response
+### Sample Success Response 成功响应例子
 
 ```json
 {
@@ -691,7 +725,7 @@ title: Examples
 }
 ```
 
-### Sample Error Response
+### Sample Error Response 错误响应例子
 
 ```json
 {
@@ -704,7 +738,7 @@ title: Examples
 
 <!--
 type: tab
-title: Try It
+title: Try It 尝试
 -->
 
 ```json http
