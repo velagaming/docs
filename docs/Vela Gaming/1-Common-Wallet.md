@@ -6,7 +6,7 @@ tags: [Vela Gaming, Common Wallet]
 
 # Common Wallet 共享钱包
 
-## Overview
+## Overview 概述
 
 This document describes the service integration between **Gaming (provider)** and an **operator**. The following chapters describe the general concept of integration as well as descriptions and examples of the API methods used for the service integration.
 
