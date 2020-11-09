@@ -48,7 +48,7 @@ This document describes the service integration between **Gaming (provider)** an
 ### Getting started 游戏接入规范
 
 To be able to connect to our game server, **operator** needs to provide the following API for us to communicate between game server and operator site. Players perform all betting and gaming by using operator's own wallet system.<b>
-为了能够连接到我们的VG游戏服务器。 第三方需要提供以下API给我们在游戏服务器和第三方之间进行链接。玩家使用VG Game Server的钱包系统执行所有投注和游戏。
+为了能够连接到我们的VG游戏服务器。 **第三方**需要提供以下API给我们在游戏服务器和第三方之间进行链接。玩家使用VG Game Server的钱包系统执行所有投注和游戏。
 
 - [Authenticate 认证 (O)](#authenticate-认证)
 - [Bet 下注 (O)](#bet-下注)
@@ -65,7 +65,7 @@ To be able to connect to our game server, **operator** needs to provide the foll
 ### Game Launch Process 游戏启动流程
 
 - When a player launches the game, it will call the **Operator's Authenticate** API.
-- 当玩家启动游戏时，将调用**第三方** Authenticate API.
+- 当玩家启动游戏时，将调用**第三方 Authenticate** API.
 <br>
 - Operator needs to provide us the **Authenticate** API.
 - 第三方需要向我们提供 **Authenticate** API。
@@ -109,7 +109,9 @@ title: Docs 文件
 | ----------- | ------ | --------------------------------------------------------------------------------------- |
 | status_code | int    | Response status code<b>响应状态代码                                                                    |
 | member_id   | string | Unique ID of the player<b>玩家唯一ID                                                                 |
-| balance     | uint64 | Current **Balance** of the player (in cents)<b>玩家点数 (进位两位数，分钱)                                            |
+| balance     | uint64 | Current **Balance** of the player (in cents)<b>玩家现有的点数 (进位两位数，分钱)                                            |
+| currency    | string | Currency code is referred to ISO 4217<b>货币代码可参考ISO 4217                                                                          |
+ (in cents)<b>玩家现有的点数 (进位两位数，分钱)                                            |
 | currency    | string | Currency code is referred to ISO 4217<b>货币代码可参考ISO 4217                                                                          |
 
 #### Status Code 状态代码
@@ -195,7 +197,7 @@ title: Docs 文件
 | Name 名称       | Type 类型  | Description  介绍                                                                          |
 | ----------- | ------ | -------------------------------------------------------------------------------------- |
 | status_code | int    | Response status code<b>响应状态代码                                                                   |
-| balance     | uint64 | Current **POINTS** of the player (in cents)<b>玩家**点数**(进位两位数，分钱)                                            |
+| balance     | uint64 | Current **POINTS** of the player (in cents)<b>玩家现有的**点数**(进位两位数，分钱)                                            |
 
 #### Status Code 状态代码
 
@@ -279,7 +281,7 @@ title: Docs 文件
 | Name  名称      | Type 类型  | Description  介绍                                                                          |
 | ----------- | ------ | -------------------------------------------------------------------------------------- |
 | status_code | int    | Response status code <b>响应状态代码                                                                  |
-| balance     | uint64 | Current **POINTS** of the player (in cents)<b>玩家**点数** (进位两位数，分钱)                                            |
+| balance     | uint64 | Current **POINTS** of the player (in cents)<b>玩家现有的**点数** (进位两位数，分钱)                                            |
 
 #### Status Code 状态代码
 
@@ -361,7 +363,7 @@ title: Docs 文件
 | Name 名称       | Type  类型  | Description 介绍                                                                           |
 | ----------- | ------ | -------------------------------------------------------------------------------------- |
 | status_code | int    | Response status code<b>响应状态代码                                                                   |
-| balance     | uint64 | Current **POINTS** of the player (in cents)<b>玩家**点数** (进位两位数，分钱)                                            |
+| balance     | uint64 | Current **POINTS** of the player (in cents)<b>玩家现有的**点数** (进位两位数，分钱)                                            |
 
 #### Status Code 状态代码 
 
