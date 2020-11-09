@@ -606,7 +606,7 @@ title: Docs 文件
 | allow_vertical | int    | Default is 1</b>默认是1 <br> 0 - landscape mode</b>0 - 横向模式 <br> 1 - allow vertical mode and landscape mode<b>1 - 允许垂直模式和横向模式 |
 
 > If host_id and access_token is not provided, it is treated as **Guest** mode.<b>如果没有提供host_id和access_token，将会被视为游客模式 。
->
+
 > ##### Example 例子
 >
 > <https://{GAME_URL}?host_id={host_id}&access_token={access_token}&mode=singleplayer&lang=ch&allow_vertical=1>
@@ -631,7 +631,7 @@ title: Docs 文件
 | key     | string | Unique database index number<b>数据库索引号                         |
 
 > If key is empty, it will return data from index zero (0).<b>如果没有提供数据库索引号，供数据库索引号将会被视为初始值为 0。
->
+
 > ##### Example 例子
 >
 > <https://{PROVIDER_API_ENDPOINT}/api/report?host_id={host_id}&key={key}>
