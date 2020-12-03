@@ -182,7 +182,7 @@ title: Docs 文件
 
 > ##### Example 例子
 >
-> https://{PROVIDER_API_ENDPOINT}/api/user/create?host_id={host_id}&member_id={member_id}&currency=MYR
+> https://{PROVIDER_API_ENDPOINT}/api/user/create?host_id={host_id}&member_id={member_id}\&currency=MYR
 
 ### Response 响应
 

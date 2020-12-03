@@ -154,7 +154,7 @@ title: Docs
 
 > ##### Example
 >
-> [https://{PROVIDER_API_ENDPOINT}/api/user/create?host_id={host_id}&member_id={member_id}¤cy=MYR&password={password}](https://{PROVIDER_API_ENDPOINT}/api/user/create?host_id={host_id}&member_id={member_id}&currency=MYR&password={password})
+> [https://{PROVIDER_API_ENDPOINT}/api/user/create?host_id={host_id}&member_id={member_id}\&currency=MYR&password={password}](https://{PROVIDER_API_ENDPOINT}/api/user/create?host_id={host_id}&member_id={member_id}&currency=MYR&password={password})
 
 ### Response
 
