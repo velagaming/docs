@@ -17,7 +17,7 @@ This document describes the service integration between **Gaming (provider)** an
 - 数据格式: JSON (JavaScript Object Notation) 
 <br>
 - Wallet Option: Separate Wallet
-- 电子钱包选项 : 游戏供应商的钱包
+- 电子钱包选项 : 转账钱包
 <br>
 - **Operator** - Referred as the operator
 - **第三方** - 被称为运营商或第三方 
