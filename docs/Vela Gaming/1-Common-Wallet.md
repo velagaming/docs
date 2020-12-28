@@ -4,7 +4,7 @@ tags: [Vela Gaming, Common Wallet]
 
 ![Vela Gaming](../../assets/images/vela_gaming/logo.jpg)
 
-# Common Wallet 共享钱包
+# Common Wallet 单一钱包
 
 ## Overview 概述
 

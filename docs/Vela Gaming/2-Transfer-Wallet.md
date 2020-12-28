@@ -4,7 +4,7 @@ tags: [Vela Gaming, Transfer Wallet]
 
 ![Vela Gaming](../../assets/images/vela_gaming/logo.jpg)
 
-# Transfer Wallet 游戏供应商的钱包
+# Transfer Wallet 转账钱包 
 
 ## Overview 概述 
 
