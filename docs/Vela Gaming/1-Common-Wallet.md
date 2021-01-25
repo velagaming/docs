@@ -632,7 +632,7 @@ title: Docs 文件
 | page_size | int(optional) | Number of records. Maximum 500 <b>记录的数量. 最大值500|
 
 > If key is empty, it will return data from index zero (0).<b>如果没有提供数据库索引号，供数据库索引号将会被视为初始值为 0。<b>
-If page_size is empty, default return 10 records.<b>
+> If page_size is empty, default return 10 records.<b>
 如果没有提供page_size,默认返回10个记录
 
 

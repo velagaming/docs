@@ -856,7 +856,7 @@ title: Docs
 | page_size | int(optional) | Number of records. Maximum 500 |
 
 > If key is empty, it will return data from index zero (0).<b>
-If page_size is empty, default return 10 records.<b>
+> If page_size is empty, default return 10 records.<b>
 >
 > ##### Example
 >
