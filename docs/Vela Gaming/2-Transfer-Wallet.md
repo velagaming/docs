@@ -4,7 +4,7 @@ tags: [Vela Gaming, Transfer Wallet]
 
 ![Vela Gaming](../../assets/images/vela_gaming/logo.jpg)
 
-# Transfer Wallet 游戏供应商的钱包
+# Transfer Wallet 转账钱包 
 
 ## Overview 概述 
 
@@ -17,7 +17,7 @@ This document describes the service integration between **Gaming (provider)** an
 - 数据格式: JSON (JavaScript Object Notation) 
 <br>
 - Wallet Option: Separate Wallet
-- 电子钱包选项 : 游戏供应商的钱包
+- 电子钱包选项 : 转账钱包
 <br>
 - **Operator** - Referred as the operator
 - **第三方** - 被称为运营商或第三方 

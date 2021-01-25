@@ -4,7 +4,7 @@ tags: [Vela Gaming, Common Wallet]
 
 ![Vela Gaming](../../assets/images/vela_gaming/logo.jpg)
 
-# Common Wallet 共享钱包
+# Common Wallet 单一钱包
 
 ## Overview 概述
 
@@ -17,7 +17,7 @@ This document describes the service integration between **Gaming (provider)** an
 - 数据格式: JSON (JavaScript Object Notation)
 <br>
 - Wallet Option: Common Wallet (a.k.a. Seamless Wallet)
-- 电子钱包选项 : 共享钱包 
+- 电子钱包选项 : 单一钱包 
 <br>
 - **Operator** - Referred as the operator
 - **第三方** - 被称为运营商或第三方
