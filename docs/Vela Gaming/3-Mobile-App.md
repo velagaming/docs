@@ -853,12 +853,14 @@ title: Docs
 | ------- | ------ | ---------------------------------------------------- |
 | host_id | string | Unique ID of Operator System (provided by game provider) |
 | key     | string | Unique database index number                         |
+| page_size | int(optional) | Number of records. Maximum 500 |
 
-> If key is empty, it will return data from index zero (0).
+> If key is empty, it will return data from index zero (0).<b>
+If page_size is empty, default return 10 records.<b>
 >
 > ##### Example
 >
-> <https://{PROVIDER_API_ENDPOINT}/api/report?host_id={host_id}&key={key}>
+> <https://{PROVIDER_API_ENDPOINT}/api/report?host_id={host_id}&key={key}&page_size={page_size}>
 
 ### Response
 
