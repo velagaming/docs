@@ -629,12 +629,16 @@ title: Docs 文件
 | host_id | string | Unique ID of Operator System (provided by game provider)<b>第三方的Host ID (游戏供应商提供)
  |
 | key     | string | Unique database index number<b>数据库索引号                         |
+| page_size | int(optional) | Number of records. Maximum 500 <b>记录的数量. 最大值500|
 
-> If key is empty, it will return data from index zero (0).<b>如果没有提供数据库索引号，供数据库索引号将会被视为初始值为 0。
+> If key is empty, it will return data from index zero (0).<b>如果没有提供数据库索引号，供数据库索引号将会被视为初始值为 0。<b>
+If page_size is empty, default return 10 records.<b>
+如果没有提供page_size,默认返回10个记录
+
 
 > ##### Example 例子
 >
-> <https://{PROVIDER_API_ENDPOINT}/api/report?host_id={host_id}&key={key}>
+> <https://{PROVIDER_API_ENDPOINT}/api/report?host_id={host_id}&key={key}&page_size={page_size}>
 
 ### Response 响应
 
