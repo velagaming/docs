@@ -453,6 +453,7 @@ title: Docs 文件
 | 0    | Success<b>成功                    |
 | 1    | Invalid Member ID<b>玩家账号无效          |
 | 2    | Invalid Host ID<b>Host ID 无效            |
+| 3    | Insufficient Funds<b>余数不足          |
 | 5    | Invalid transid<b>Transaction ID 无效            |
 | 6    | This transid has been used<b>这 Transaction ID 已被用过 |
 
