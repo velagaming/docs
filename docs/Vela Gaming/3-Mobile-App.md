@@ -825,40 +825,84 @@ title: Examples
 
 ```json
 {
-  "data": {
-    "status_code": 0,
-    "report": [
-      {
-        "id": "4",
-        "ticket_id": "2192",
-        "game_code": "fish",
-        "code": "fish",
-        "game_group": "action",
-        "username": "demo04",
-        "bet_stake": 10000,
-        "commission": 0,
-        "bet_info": {
-          "room_type": "room x1"
-        },
-        "result_info": {
-          "total_bullet_cost": 3,
-          "total_fish_payout": 0
-        },
-        "payout_amount": 9997,
-        "gain_amount": 0,
-        "loss_amount": 3,
-        "draw_amount": 0,
-        "cancel_amount": 0,
-        "reject_amount": 0,
-        "data": null,
-        "status": "done",
-        "remark": null,
-        "report_date": "2017-07-31 17:38:10"
-      }
-    ],
-    "key": "13",
-    "version_key": "13"
-  }
+    "data": {
+        "status_code": 0,
+        "report": [
+            {
+                "id": "1552012",
+                "ticket_id": "1493",
+                "game_code": "fish",
+                "code": "fish",
+                "game_group": "shooting",
+                "username": "demo1",
+                "bet_stake": 2.7,
+                "commission": 0,
+                "bet_info": [
+                    {
+                        "payout": [
+                            {
+                                "type": 0,
+                                "multiplier": 2,
+                                "bullet_type": 0,
+                                "bullet_cost": 0.1,
+                                "total_gain": 0.2
+                            },
+                            {
+                                "type": 3,
+                                "multiplier": 4,
+                                "bullet_type": 0,
+                                "bullet_cost": 0.1,
+                                "total_gain": 0.4
+                            },
+                            {
+                                "type": 3,
+                                "multiplier": 4,
+                                "bullet_type": 0,
+                                "bullet_cost": 0.1,
+                                "total_gain": 0.4
+                            },
+                            {
+                                "type": 0,
+                                "multiplier": 2,
+                                "bullet_type": 0,
+                                "bullet_cost": 0.1,
+                                "total_gain": 0.2
+                            }
+                        ],
+                        "bullet": "[27,0,0,0,0]",
+                        "total_bullet": 27
+                    },
+                    {
+                        "payout": [],
+                        "bullet": "[0,0,0,0,0]",
+                        "total_bullet": 0
+                    },
+                    {
+                        "payout": [],
+                        "bullet": "[0,0,0,0,0]",
+                        "total_bullet": 0
+                    }
+                ],
+                "result_info": null,
+                "payout_amount": 1.2,
+                "gain_amount": 0,
+                "loss_amount": 1.5,
+                "draw_amount": 0,
+                "cancel_amount": 0,
+                "reject_amount": 0,
+                "before_balance": 2070796.59,
+                "after_balance": 2070795.09,
+                "data": null,
+                "jackpot": null,
+                "status": "done",
+                "remark": null,
+                "report_date": "2022-03-28 15:58:27",
+                "report_link": "https://**{PROVIDER_API_ENDPOINT}**/admin/detail-report?game=fish&id=1493&isiframe=true"
+            }
+        ],
+        "key": "1552012",
+        "version_key": "1552012"
+    }
 }
 ```
 
