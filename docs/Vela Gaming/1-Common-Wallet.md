@@ -13,35 +13,33 @@ This document describes the service integration between **Gaming (provider)** an
 
 ### General Notes 一般注意事项
 
-- Data Format: JSON (JavaScript Object Notation)
-- 数据格式: JSON (JavaScript Object Notation)
-<br>
-- Wallet Option: Common Wallet (a.k.a. Seamless Wallet)
-- 电子钱包选项 : 单一钱包 
-<br>
-- **Operator** - Referred as the operator
-- **第三方** - 被称为运营商或第三方
-<br>
-- **Provider** - Referred as the game provider
-- **游戏供应商** - 被称为游戏供应商
-<br>
-- **Host ID** - This Host ID is an unique token generated from game provider for each game operator 
-- **Host ID** - Host ID是游戏供应商为每个第三方提供的唯一令牌
-<br>
-- **Points** - Referred as the game points; not player's actual wallet balance.
-- **Points** - Points是游戏点数；不是玩家的实际钱包余额.
-<br>
-- The operator manages the user account database (personal information, balance, wallet operations, etc.)
-- 游戏第三方管理用户帐户数据库(个人资料, 余额, 钱包操作等.)
-<br>
-- The provider only manages the player data necessary to perform game operation.
-- 游戏供应商仅管理游戏操作所需和玩家数据
-<br>
-- All methods support uses **HTTPS GET** verb in the system.
-- 全部请求内容必须使用 HTTPS GET 调用
-<br>
-- Players perform all betting and gaming by using Operator's wallet system. Therefore, **operator** need to develop and integrate VG API .
-- 玩家使用VG Game Server的钱包系统执行所有投注和游戏。因此,**第三方**需要连接VG API。
+- Data Format : JSON (JavaScript Object Notation)<br>数据格式: JSON (JavaScript Object Notation)
+<space>
+
+- Wallet Option: Separate Wallet<br>电子钱包选项 : 转账钱包
+<space>
+
+- Operator - Referred as the operator<br>第三方 - 被称为运营商或第三方。
+<space>
+
+- Provider - Referred as the game provider<br>游戏供应商 - 被称为游戏供应商。
+<space>
+
+- Host ID - This Host ID is an unique token generated from game provider for each game operator<br>Host ID - Host ID是游戏供应商为每个第三方提供的唯一令牌。
+<space>
+
+- Points - Referred as the game points; not player's actual wallet balance<br>Points - Points是游戏点数；不是玩家的实际钱包余额。
+<space>
+
+- The provider manages the user account database (personal information, balance, wallet operations, etc.)<br>游戏供应商管理用户帐户数据库(个人资料, 余额, 钱包操作等。)
+<space>
+
+- All methods support uses **HTTPS GET** verb in the system.<br>全部请求内容必须使用 **HTTPS GET** 调用。
+<space>
+
+- Players perform all betting and gaming by using VG Game Server's wallet system. Therefore, **operator** need to integrate VG API.<br>玩家使用VG Game Server的钱包系统执行所有投注和游戏。 因此，第三方需要连接VG API。
+<space>
+
 
 
 
