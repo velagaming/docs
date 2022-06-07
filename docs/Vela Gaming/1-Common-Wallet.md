@@ -55,13 +55,13 @@ To be able to connect to our game server, **operator** needs to provide the foll
 - [Result 成绩 (O)](#result-成绩)
 - [Refund Bet 退款 (O)](#refund-bet-退款)
 - [Bet and Win 下注赢利 (O)](#bet-and-win-下注赢利)
-- [Claim Rebate 索取回扣 (O)](#claim-rebate-索取回扣)
-- [Get Balance 获取余额 (O)](#get-balance-获取余额)
-- [Player Rebate Transaction 玩家返利列表 (O)](#player-rebate-transaction-玩家返利列表)
-- [Player Rebate Balance 玩家返利余额 (O)](#player-rebate-balance-玩家返利余额)
 - [Game List 游戏列表](#game-list-游戏列表)
 - [Game Launch 游戏启动](#game-launch-游戏启动)
 - [User Report 玩家报表](#user-report-玩家报表)
+- [Claim Rebate 索取回扣](#claim-rebate-索取回扣)
+- [Player Balance 玩家余额](#player-balance-玩家余额)
+- [Player Rebate Transaction 玩家返利列表](#player-rebate-transaction-玩家返利列表)
+- [Player Rebate Balance 玩家返利余额](#player-rebate-balance-玩家返利余额)
 
 \*\*(O) is referred to API that is required to be develop by operator.
 <b> \*\*(O) 是指第三方必须开发的API。</b>
@@ -500,417 +500,6 @@ title: Try It 尝试
 
 <!-- type: tab-end -->
 
-### Claim Rebate 索取回扣
-
-This API is used to claim rebate. Upon called - player can claim money from rebate. Operator needs to implement this API for rebate purposes. <b>此 API 仅用于把资金转入玩家帐户。玩家可以从回扣中索取金钱。第三方需要实施此API以使用此功能。</b>
-
-<!--
-type: tab
-title: Docs 文件
--->
-
-### Request 请求
-
-| Name 名称      | Type 类型   | Description 介绍                                                                          |
-| -------------- | ------ | ----------------------------------------------------------------------------------- |
-| host_id        | string | Unique ID of Operator System (provided by game provider) <b>第三方的 Host ID (游戏供应商提供)</b>                                |
-| member_id      | string | Unique ID of the player<b> 玩家唯一ID</b>      |
-| amount         | uint64 | Amount to claim rebate<b> 申请回扣的金额</b>      |
-
-> ##### Example 例子
->
-> https://{OPERATOR_API_ENDPOINT}/api/user/claim-rebate?host_id={host_id}&member_id={member_id}&amount={amount}
-
-### Response 响应
-
-| Name 名称         | Type 类型 | Description  介绍        |
-| -------------- | -------- | -------------------- |
-| member_id      |  string  | 	Unique ID of the player<b>玩家唯一ID</b> |
-| balance        |  uint64  | Current **Balance** of the player (in cents)<b>玩家现有的点数 (进位两位数，分钱)</b>        |
-| rebate_balance |  uint64  | Current **Rebate Balance** of the player (in cents)<b>玩家现有的回扣点数 (进位两位数，分钱)</b> |
-| amount         |  uint64  | Amount to claim rebate (in cents)<b>申请回扣的金额</b> |
-| message        |  string  | Message after claim rebate successful<b>领取返利成功后的留言</b> |
-
-#### Status Code 状态代码
-
-| Code 代码 | Description 介绍           |
-| ---- | ---------------------- |
-| 0    | Success <b>成功</b>                |
-| 1    | Invalid Member ID <b>玩家账号无效</b>          |
-| 2    | Invalid Host ID <b>Host ID 无效</b>          |
-| 3    | Insufficient accumulated rebate balance <b>累计返利余额不足</b>          |
-
-<!--
-type: tab
-title: Examples 例子 
--->
-
-### Sample Success Response 成功响应例子
-
-```json
-{
-    "data": {
-      "status_code": 0,
-      "member_id": "demo04",
-      "balance": 116570181,
-      "rebate_balance": 49497,
-      "amount": 500,
-      "message": "Rebate of 500 is successfully claimed"
-    }
-}
-```
-
-### Sample Error Response 错误响应例子
-
-```json
-{
-  "error": {
-    "status_code": 2,
-    "message": "Invalid Host ID",
-    "retry": null
-  }
-}
-```
-
-<!-- type: tab-end -->
-
-### Player Balance 玩家余额
-
-This API is used to get player balance. Operator needs to implement this API for rebate purposes. <b>此 API 用于获取玩家余额。第三方需要实施此API以使用此功能。</b>
-
-<!--
-type: tab
-title: Docs 文件
--->
-
-### Request 请求
-
-| Name 名称      | Type 类型   | Description 介绍                                                                          |
-| -------------- | ------ | ----------------------------------------------------------------------------------- |
-| host_id        | string | Unique ID of Operator System (provided by game provider)<b>第三方的 Host ID (游戏供应商提供)</b>                                |
-| member_id      | string | Unique ID of the player<b>玩家唯一ID</b>      |
-
-> ##### Example 例子
->
-> https://{OPERATOR_API_ENDPOINT}/api/user/get-wallet-balance?host_id={host_id}&member_id={member_id}
-
-### Response 响应
-
-| Name 名称         | Type 类型 | Description  介绍        |
-| ----------------- | -------- | -------------------- |
-| member_id         |  string  | Response status code<b>响应状态代码</b> |
-| rebate_balance    |  uint64  | Current Rebate Balance of the player (in cents) <b>报表列表</b>        |
-| balance           |  uint64  | Current Balance of the player (in cents) <b>玩家现有的点数 (进位两位数，分钱)</b> |
-| promotion_balance |  uint64  | Current Promotion Balance of the player (in cents) <b>玩家促销现有的点数 (进位两位数，分钱)</b> |
-| claim_limit       |  uint64  | Limit that can be claimed for rebate (in cents) <b>可申请回扣的限额</b> |
-
-#### Status Code 状态代码
-
-| Code 代码 | Description 介绍           |
-| ---- | ---------------------- |
-| 0    | Success <b>成功</b>                |
-| 1    | Invalid Member ID <b>玩家账号无效</b>          |
-| 2    | Invalid Host ID <b>Host ID 无效</b>          |
-
-<!--
-type: tab
-title: Examples 例子 
--->
-
-### Sample Success Response 成功响应例子
-
-```json
-{
-    "data": {
-      "status_code": 0,
-      "member_id": "demo04",
-      "rebate_balance": 49497,
-      "balance": 116570182,
-      "promotion_balance": 0,
-      "claim_limit": 0
-    }
-}
-```
-
-### Sample Error Response 错误响应例子
-
-```json
-{
-  "error": {
-    "status_code": 2,
-    "message": "Invalid Host ID",
-    "retry": null
-  }
-}
-```
-
-<!-- type: tab-end -->
-
-### Player Rebate Transaction 玩家返利列表
-
-This API will list out all of the player rebate transactions. Operator needs to implement this API for rebate purposes. <b>此 API 将列出所有玩家返利交易。第三方需要实施此API以使用此功能。</b>
-
-<!--
-type: tab
-title: Docs 文件
--->
-
-### Request 请求
-
-| Name 名称      | Type 类型   | Description 介绍                                                                          |
-| -------------- | ------ | ----------------------------------------------------------------------------------- |
-| host_id        | string | Unique ID of Operator System (provided by game provider) <b>第三方的 Host ID (游戏供应商提供)</b>                                |
-| member_id      | string(optional) | Unique ID of the player <b>玩家唯一ID</b>      |
-
-> ##### Example 例子
->
-> https://{OPERATOR_API_ENDPOINT}/api/user/player-rebate-transaction?host_id={host_id}&member_id={member_id}
-
-### Response 响应
-
-| Name 名称         | Type 类型 | Description  介绍        |
-| -------------- | -------- | -------------------- |
-| status_code    |  int     | Response status code<b>响应状态代码</b> |
-| report         |  array   | A list report <b>报表列表</b>        |
-
-#### Status Code 状态代码
-
-| Code 代码 | Description 介绍           |
-| ---- | ---------------------- |
-| 0    | Success <b>成功</b>                |
-| 1    | Invalid Member ID <b>玩家账号无效</b>          |
-| 2    | Invalid Host ID <b>Host ID 无效</b>          |
-
-<!--
-type: tab
-title: Examples 例子 
--->
-
-### Sample Success Response 成功响应例子
-
-```json
-{
-    "data": {
-      "status_code": 0,
-        "report": [
-          {
-            "id": "17593",
-            "user_id": "2",
-            "username": "demo04",
-            "transid": "509114",
-            "amount": "6.23",
-            "before_balance": "1160703.68",
-            "after_balance": "1160709.91",
-            "created_at": "2022-06-01 18:09:58"
-          },
-          {
-            "id": "17592",
-            "user_id": "2",
-            "username": "demo04",
-            "transid": "509113",
-            "amount": "6.23",
-            "before_balance": "1160697.45",
-            "after_balance": "1160703.68",
-            "created_at": "2022-06-01 17:36:22"
-          },
-          {
-            "id": "17591",
-            "user_id": "2",
-            "username": "demo04",
-            "transid": "509112",
-            "amount": "49969.31",
-            "before_balance": "1110728.14",
-            "after_balance": "1160697.45",
-            "created_at": "2022-06-01 17:35:09"
-          },
-          {
-            "id": "17590",
-            "user_id": "2",
-            "username": "demo04",
-            "transid": "509111",
-            "amount": "6.23",
-            "before_balance": "1110721.91",
-            "after_balance": "1110728.14",
-            "created_at": "2022-06-01 16:52:34"
-          },
-          {
-            "id": "17589",
-            "user_id": "2",
-            "username": "demo04",
-            "transid": "509110",
-            "amount": "6.23",
-            "before_balance": "1110715.68",
-            "after_balance": "1110721.91",
-            "created_at": "2022-06-01 16:13:52"
-          },
-          {
-            "id": "17588",
-            "user_id": "2",
-            "username": "demo04",
-            "transid": "509109",
-            "amount": "6.23",
-            "before_balance": "1110709.45",
-            "after_balance": "1110715.68",
-            "created_at": "2022-06-01 15:52:29"
-          },
-          {
-            "id": "17587",
-            "user_id": "2",
-            "username": "demo04",
-            "transid": "509108",
-            "amount": "6",
-            "before_balance": "1110703.45",
-            "after_balance": "1110709.45",
-            "created_at": "2022-06-01 15:47:56"
-          },
-          {
-            "id": "17586",
-            "user_id": "2",
-            "username": "demo04",
-            "transid": "509107",
-            "amount": "6",
-            "before_balance": "1110697.45",
-            "after_balance": "1110703.45",
-            "created_at": "2022-06-01 15:46:27"
-          },
-          {
-            "id": "17585",
-            "user_id": "2",
-            "username": "demo04",
-            "transid": "509106",
-            "amount": "6",
-            "before_balance": "1110691.45",
-            "after_balance": "1110697.45",
-            "created_at": "2022-06-01 15:31:46"
-          },
-          {
-            "id": "17584",
-            "user_id": "2",
-            "username": "demo04",
-            "transid": "509105",
-            "amount": "6",
-            "before_balance": "1110685.45",
-            "after_balance": "1110691.45",
-            "created_at": "2022-06-01 15:30:51"
-          },
-          {
-            "id": "17583",
-            "user_id": "2",
-            "username": "demo04",
-            "transid": "509104",
-            "amount": "6",
-            "before_balance": "1110679.45",
-            "after_balance": "1110685.45",
-            "created_at": "2022-06-01 15:30:09"
-          }
-      ],
-      "key": "17583"
-    }
-}
-```
-
-### Sample Error Response 错误响应例子
-
-```json
-{
-  "error": {
-    "status_code": 2,
-    "message": "Invalid Host ID",
-    "retry": null
-  }
-}
-```
-
-<!-- type: tab-end -->
-
-### Player Rebate Balance 玩家返利余额
-
-This API is used to get player rebate wallet balance. Operator needs to implement this API for rebate purposes. <b>此 API 用于获取玩家返利余额。第三方需要实施此API以使用此功能。</b>
-
-<!--
-type: tab
-title: Docs 文件
--->
-
-### Request 请求
-
-| Name 名称      | Type 类型   | Description 介绍                                                                          |
-| -------------- | ------ | ----------------------------------------------------------------------------------- |
-| host_id        | string | Unique ID of Operator System (provided by game provider) <b>第三方的 Host ID (游戏供应商提供)</b>                                |
-| member_id      | int(optional) | Unique ID of the player <b>玩家唯一ID</b>      |
-| key            | string        | Unique database index number <b>数据库索引号</b>      |
-| page_size      | int(optional) | Number of records. Maximum 500 <b>记录的数量. 最大值500</b>      |
-
-> If key is empty, it will return data from index zero (0). <b>如果没有提供数据库索引号，供数据库索引号将会被视为初始值为 0。</b>
-
-> If page_size is empty, default return 10 records. <b>如果没有提供page_size,默认返回10个记录。</b>
-
-> ##### Example 例子
->
-> https://{OPERATOR_API_ENDPOINT}/api/user/player-rebate-balance?host_id={host_id}&member_id={member_id}&key={key}&page_size={page_size}
-
-### Response 响应
-
-| Name 名称         | Type 类型 | Description  介绍        |
-| ----------------- | -------- | -------------------- |
-| status_code       |  int     | Response status code<b>响应状态代码</b> |
-| report            |  array   | A list of player rebate wallet. <b>玩家返利钱包列表</b>        |
-
-#### Status Code 状态代码
-
-| Code 代码 | Description 介绍           |
-| ---- | ---------------------- |
-| 0    | Success <b>成功</b>          |
-| 1    | Invalid Member ID <b>玩家账号无效</b>          |
-| 2    | Invalid Host ID <b>Host ID 无效</b>          |
-
-<!--
-type: tab
-title: Examples 例子 
--->
-
-### Sample Success Response 成功响应例子
-
-```json
-{
-    "data": {
-      "status_code": 0,
-      "key": "26",
-      "report": [
-        {
-          "id": "21",
-          "member_id": "test004",
-          "rebate_balance": "82.2598"
-        },
-        {
-          "id": "25",
-          "member_id": "test012",
-          "rebate_balance": "86.195"
-        },
-        {
-          "id": "26",
-          "member_id": "ibet06",
-          "rebate_balance": "21.908"
-        }
-      ]
-    }
-}
-```
-
-### Sample Error Response 错误响应例子
-
-```json
-{
-  "error": {
-    "status_code": 2,
-    "message": "Invalid Host ID",
-    "retry": null
-  }
-}
-```
-
-<!-- type: tab-end -->
-
 ## Game List 游戏列表 
 
 This api will return game list to operator.<b>这API将游戏列表返回给第三方。</b>
@@ -992,7 +581,7 @@ title: Try It 尝试
 ```json http
 {
   "method": "get",
-  "url": "https://{PROVIDER_API_ENDPOINT}/api/user/gamelist",
+  "url": "https://bo-stage.velachip.com/api/user/gamelist",
   "query": {
     "host_id": "{host_id}"
   }
@@ -1200,7 +789,7 @@ title: Try It 尝试
 ```json http
 {
   "method": "get",
-  "url": "https://{PROVIDER_API_ENDPOINT}/api/report",
+  "url": "https://bo-stage.velachip.com/api/report",
   "query": {
     "host_id": "{host_id}",
     "key": "{key}"
@@ -1231,5 +820,493 @@ title: Docs 文件
 > ##### Example 例子
 >
 > https://{Lobby_URL}?host_id={host_id}&access_token={access_token}
+
+<!-- type: tab-end -->
+
+## Claim Rebate 索取回扣
+
+This API is used to claim rebate. Upon called - player can claim money from rebate. Operator needs to implement this API for rebate purposes. <b>此 API 仅用于把资金转入玩家帐户。玩家可以从回扣中索取金钱。第三方需要实施此API以使用此功能。</b>
+
+<!--
+type: tab
+title: Docs 文件
+-->
+
+### Request 请求
+
+| Name 名称      | Type 类型   | Description 介绍                                                                          |
+| -------------- | ------ | ----------------------------------------------------------------------------------- |
+| host_id        | string | Unique ID of Operator System (provided by game provider) <b>第三方的 Host ID (游戏供应商提供)</b>                                |
+| member_id      | string | Unique ID of the player<b> 玩家唯一ID</b>      |
+| amount         | uint64 | Amount to claim rebate<b> 申请回扣的金额 (进位两位数，分钱)</b>      |
+
+> ##### Example 例子
+>
+> https://{OPERATOR_API_ENDPOINT}/api/user/claim-rebate?host_id={host_id}&member_id={member_id}&amount={amount}
+
+### Response 响应
+
+| Name 名称         | Type 类型 | Description  介绍        |
+| -------------- | -------- | -------------------- |
+| status_code    |  int     | 	Response status code<b>响应状态代码</b> |
+| member_id      |  string  | 	Unique ID of the player<b>玩家唯一ID</b> |
+| balance        |  uint64  | Current **Balance** of the player (in cents)<b>玩家现有的点数 (进位两位数，分钱)</b>        |
+| rebate_balance |  uint64  | Current **Rebate Balance** of the player (in cents)<b>玩家现有的回扣点数 (进位两位数，分钱)</b> |
+| amount         |  uint64  | Amount to claim rebate (in cents)<b>申请回扣的金额</b> |
+| message        |  string  | Message after claim rebate successful<b>领取返利成功后的留言</b> |
+
+#### Status Code 状态代码
+
+| Code 代码 | Description 介绍           |
+| ---- | ---------------------- |
+| 0    | Success <b>成功</b>                |
+| 1    | Invalid Member ID <b>玩家账号无效</b>          |
+| 2    | Invalid Host ID <b>Host ID 无效</b>          |
+| 3    | Insufficient accumulated rebate balance <b>累计返利余额不足</b>          |
+
+<!--
+type: tab
+title: Examples 例子 
+-->
+
+### Sample Success Response 成功响应例子
+
+```json
+{
+    "data": {
+      "status_code": 0,
+      "member_id": "demo04",
+      "balance": 116570181,
+      "rebate_balance": 49497,
+      "amount": 500,
+      "message": "Rebate of 500 is successfully claimed"
+    }
+}
+```
+
+### Sample Error Response 错误响应例子
+
+```json
+{
+  "error": {
+    "status_code": 2,
+    "message": "Invalid Host ID",
+    "retry": null
+  }
+}
+```
+
+<!--
+type: tab
+title: Try It 尝试
+-->
+**Staging Environment 测试环境**
+<br>
+
+```json http
+{
+  "method": "get",
+  "url": "https://bo-stage.velachip.com/api/user/claim-rebate",
+  "query": {
+    "host_id": "{host_id}",
+    "member_id": "{member_id}",
+    "amount": "{amount}"
+  }
+}
+```
+
+<!-- type: tab-end -->
+
+## Player Balance 玩家余额
+
+This API is used to get player balance. Operator needs to implement this API for rebate purposes. <b>此 API 用于获取玩家余额。第三方需要实施此API以使用此功能。</b>
+
+<!--
+type: tab
+title: Docs 文件
+-->
+
+### Request 请求
+
+| Name 名称      | Type 类型   | Description 介绍                                                                          |
+| -------------- | ------ | ----------------------------------------------------------------------------------- |
+| host_id        | string | Unique ID of Operator System (provided by game provider)<b>第三方的 Host ID (游戏供应商提供)</b>                                |
+| member_id      | string | Unique ID of the player<b>玩家唯一ID</b>      |
+
+> ##### Example 例子
+>
+> https://{OPERATOR_API_ENDPOINT}/api/user/get-wallet-balance?host_id={host_id}&member_id={member_id}
+
+### Response 响应
+
+| Name 名称         | Type 类型 | Description  介绍        |
+| ----------------- | -------- | -------------------- |
+| status_code       |  int     | Response status code<b>响应状态代码</b> |
+| member_id         |  string  | Unique ID of the player<b>玩家唯一ID</b> |
+| rebate_balance    |  uint64  | Current Rebate Balance of the player (in cents) <b>报表列表 (进位两位数，分钱)</b>        |
+| balance           |  uint64  | Current Balance of the player (in cents) <b>玩家现有的点数 (进位两位数，分钱)</b> |
+| promotion_balance |  uint64  | Current Promotion Balance of the player (in cents) <b>玩家促销现有的点数 (进位两位数，分钱)</b> |
+| claim_limit       |  uint64  | Limit that can be claimed for rebate (in cents) <b>可申请回扣的限额 (进位两位数，分钱)</b> |
+
+#### Status Code 状态代码
+
+| Code 代码 | Description 介绍           |
+| ---- | ---------------------- |
+| 0    | Success <b>成功</b>                |
+| 1    | Invalid Member ID <b>玩家账号无效</b>          |
+| 2    | Invalid Host ID <b>Host ID 无效</b>          |
+
+<!--
+type: tab
+title: Examples 例子 
+-->
+
+### Sample Success Response 成功响应例子
+
+```json
+{
+    "data": {
+      "status_code": 0,
+      "member_id": "demo04",
+      "rebate_balance": 49497,
+      "balance": 116570182,
+      "promotion_balance": 0,
+      "claim_limit": 100
+    }
+}
+```
+
+### Sample Error Response 错误响应例子
+
+```json
+{
+  "error": {
+    "status_code": 2,
+    "message": "Invalid Host ID",
+    "retry": null
+  }
+}
+```
+
+<!--
+type: tab
+title: Try It 尝试
+-->
+**Staging Environment 测试环境**
+<br>
+
+```json http
+{
+  "method": "get",
+  "url": "https://bo-stage.velachip.com/api/user/get-wallet-balance",
+  "query": {
+    "host_id": "{host_id}",
+    "member_id": "{member_id}"
+  }
+}
+```
+
+<!-- type: tab-end -->
+
+## Player Rebate Transaction 玩家返利列表
+
+This API will list out all of the player rebate transactions. Operator needs to implement this API for rebate purposes. <b>此 API 将列出所有玩家返利交易。第三方需要实施此API以使用此功能。</b>
+
+<!--
+type: tab
+title: Docs 文件
+-->
+
+### Request 请求
+
+| Name 名称      | Type 类型   | Description 介绍                                                                          |
+| -------------- | ------ | ----------------------------------------------------------------------------------- |
+| host_id        | string | Unique ID of Operator System (provided by game provider) <b>第三方的 Host ID (游戏供应商提供)</b> |
+| member_id      | string(optional) | Unique ID of the player <b>玩家唯一ID</b> |
+
+> ##### Example 例子
+>
+> https://{OPERATOR_API_ENDPOINT}/api/user/player-rebate-transaction?host_id={host_id}&member_id={member_id}
+
+### Response 响应
+
+| Name 名称         | Type 类型 | Description  介绍        |
+| -------------- | -------- | -------------------- |
+| status_code    |  int     | Response status code<b>响应状态代码</b> |
+| report         |  array   | A list report <b>报表列表</b>        |
+
+#### Status Code 状态代码
+
+| Code 代码 | Description 介绍           |
+| ---- | ---------------------- |
+| 0    | Success <b>成功</b>                |
+| 1    | Invalid Member ID <b>玩家账号无效</b>          |
+| 2    | Invalid Host ID <b>Host ID 无效</b>          |
+
+<!--
+type: tab
+title: Examples 例子 
+-->
+
+### Sample Success Response 成功响应例子
+
+```json
+{
+    "data": {
+      "status_code": 0,
+        "report": [
+          {
+            "id": "17593",
+            "user_id": "2",
+            "username": "demo04",
+            "transid": "509114",
+            "amount": "6.23",
+            "before_balance": "1160703.68",
+            "after_balance": "1160709.91",
+            "created_at": "2022-06-01 18:09:58"
+          },
+          {
+            "id": "17592",
+            "user_id": "2",
+            "username": "demo04",
+            "transid": "509113",
+            "amount": "6.23",
+            "before_balance": "1160697.45",
+            "after_balance": "1160703.68",
+            "created_at": "2022-06-01 17:36:22"
+          },
+          {
+            "id": "17591",
+            "user_id": "2",
+            "username": "demo04",
+            "transid": "509112",
+            "amount": "49969.31",
+            "before_balance": "1110728.14",
+            "after_balance": "1160697.45",
+            "created_at": "2022-06-01 17:35:09"
+          },
+          {
+            "id": "17590",
+            "user_id": "2",
+            "username": "demo04",
+            "transid": "509111",
+            "amount": "6.23",
+            "before_balance": "1110721.91",
+            "after_balance": "1110728.14",
+            "created_at": "2022-06-01 16:52:34"
+          },
+          {
+            "id": "17589",
+            "user_id": "2",
+            "username": "demo04",
+            "transid": "509110",
+            "amount": "6.23",
+            "before_balance": "1110715.68",
+            "after_balance": "1110721.91",
+            "created_at": "2022-06-01 16:13:52"
+          },
+          {
+            "id": "17588",
+            "user_id": "2",
+            "username": "demo04",
+            "transid": "509109",
+            "amount": "6.23",
+            "before_balance": "1110709.45",
+            "after_balance": "1110715.68",
+            "created_at": "2022-06-01 15:52:29"
+          },
+          {
+            "id": "17587",
+            "user_id": "2",
+            "username": "demo04",
+            "transid": "509108",
+            "amount": "6",
+            "before_balance": "1110703.45",
+            "after_balance": "1110709.45",
+            "created_at": "2022-06-01 15:47:56"
+          },
+          {
+            "id": "17586",
+            "user_id": "2",
+            "username": "demo04",
+            "transid": "509107",
+            "amount": "6",
+            "before_balance": "1110697.45",
+            "after_balance": "1110703.45",
+            "created_at": "2022-06-01 15:46:27"
+          },
+          {
+            "id": "17585",
+            "user_id": "2",
+            "username": "demo04",
+            "transid": "509106",
+            "amount": "6",
+            "before_balance": "1110691.45",
+            "after_balance": "1110697.45",
+            "created_at": "2022-06-01 15:31:46"
+          },
+          {
+            "id": "17584",
+            "user_id": "2",
+            "username": "demo04",
+            "transid": "509105",
+            "amount": "6",
+            "before_balance": "1110685.45",
+            "after_balance": "1110691.45",
+            "created_at": "2022-06-01 15:30:51"
+          },
+          {
+            "id": "17583",
+            "user_id": "2",
+            "username": "demo04",
+            "transid": "509104",
+            "amount": "6",
+            "before_balance": "1110679.45",
+            "after_balance": "1110685.45",
+            "created_at": "2022-06-01 15:30:09"
+          }
+      ],
+      "key": "17583"
+    }
+}
+```
+
+### Sample Error Response 错误响应例子
+
+```json
+{
+  "error": {
+    "status_code": 2,
+    "message": "Invalid Host ID",
+    "retry": null
+  }
+}
+```
+
+<!--
+type: tab
+title: Try It 尝试
+-->
+**Staging Environment 测试环境**
+<br>
+
+```json http
+{
+  "method": "get",
+  "url": "https://bo-stage.velachip.com/api/user/player-rebate-transaction",
+  "query": {
+    "host_id": "{host_id}",
+    "member_id": "{member_id}"
+  }
+}
+```
+
+<!-- type: tab-end -->
+
+## Player Rebate Balance 玩家返利余额
+
+This API is used to get player rebate wallet balance. Operator needs to implement this API for rebate purposes. <b>此 API 用于获取玩家返利余额。第三方需要实施此API以使用此功能。</b>
+
+<!--
+type: tab
+title: Docs 文件
+-->
+
+### Request 请求
+
+| Name 名称      | Type 类型   | Description 介绍                                                                          |
+| -------------- | ------ | ----------------------------------------------------------------------------------- |
+| host_id        | string | Unique ID of Operator System (provided by game provider) <b>第三方的 Host ID (游戏供应商提供)</b>                                |
+| member_id      | string(optional) | Unique ID of the player <b>玩家唯一ID</b>      |
+| key            | int(optional) | Unique database index number <b>数据库索引号</b>      |
+| page_size      | int(optional) | Number of records. Maximum 500 <b>记录的数量. 最大值500</b>      |
+
+> If key is empty, it will return data from index zero (0). <b>如果没有提供数据库索引号，供数据库索引号将会被视为初始值为 0。</b>
+
+> If page_size is empty, default return 10 records. <b>如果没有提供page_size,默认返回10个记录。</b>
+
+> ##### Example 例子
+>
+> https://{OPERATOR_API_ENDPOINT}/api/user/player-rebate-balance?host_id={host_id}&member_id={member_id}&key={key}&page_size={page_size}
+
+### Response 响应
+
+| Name 名称         | Type 类型 | Description  介绍        |
+| ----------------- | -------- | -------------------- |
+| status_code       |  int     | Response status code<b>响应状态代码</b> |
+| report            |  array   | A list of player rebate wallet<b>玩家返利钱包列表</b>        |
+
+#### Status Code 状态代码
+
+| Code 代码 | Description 介绍           |
+| ---- | ---------------------- |
+| 0    | Success <b>成功</b>          |
+| 1    | Invalid Member ID <b>玩家账号无效</b>          |
+| 2    | Invalid Host ID <b>Host ID 无效</b>          |
+
+<!--
+type: tab
+title: Examples 例子 
+-->
+
+### Sample Success Response 成功响应例子
+
+```json
+{
+    "data": {
+      "status_code": 0,
+      "key": "26",
+      "report": [
+        {
+          "id": "21",
+          "member_id": "test004",
+          "rebate_balance": "82.2598"
+        },
+        {
+          "id": "25",
+          "member_id": "test012",
+          "rebate_balance": "86.195"
+        },
+        {
+          "id": "26",
+          "member_id": "ibet06",
+          "rebate_balance": "21.908"
+        }
+      ]
+    }
+}
+```
+
+### Sample Error Response 错误响应例子
+
+```json
+{
+  "error": {
+    "status_code": 2,
+    "message": "Invalid Host ID",
+    "retry": null
+  }
+}
+```
+
+<!--
+type: tab
+title: Try It 尝试
+-->
+**Staging Environment 测试环境**
+<br>
+
+```json http
+{
+  "method": "get",
+  "url": "https://bo-stage.velachip.com/api/user/player-rebate-balance",
+  "query": {
+    "host_id": "{host_id}",
+    "member_id": "{member_id}",
+    "key": "{key}",
+    "page_size": "{page_size}"
+  }
+}
+```
 
 <!-- type: tab-end -->
