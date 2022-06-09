@@ -1021,6 +1021,12 @@ title: Docs 文件
 | -------------- | ------ | ----------------------------------------------------------------------------------- |
 | host_id        | string | Unique ID of Operator System (provided by game provider) <b>第三方的 Host ID (游戏供应商提供)</b> |
 | member_id      | string(optional) | Unique ID of the player <b>玩家唯一ID</b> |
+| start_date | string<br>(optional) | Starting date in the format of YYYY-MM-DD, eg. 2020-02-02. Default value is today’s date |
+| end_date | string<br>(optional) | Ending date in the format of YYYY-MM-DD, eg. 2020-02-02. Default value is today’s date |
+| start_time | string<br>(optional) | Starting time in the format of HH:MM:SS, eg. 15:09:59. Default value is 00:00:00 |
+| end_time | string<br>(optional) | Ending time in the format of HH:MM:SS, eg. 15:09:59. Default value is 23:59:59 |
+| page_size | string<br>(optional) | Number of records.<br>记录的数量.
+| key | string<br>(optional) | Unique database index number<br>数据库索引号 |
 
 > ##### Example 例子
 >
@@ -1032,13 +1038,13 @@ title: Docs 文件
 | -------------- | -------- | -------------------- |
 | status_code    |  int     | Response status code<b>响应状态代码</b> |
 | report         |  array   | A list report <b>报表列表</b>        |
+| key            |  string  | Unique database index number<br>数据库索引号 |
 
 #### Status Code 状态代码
 
 | Code 代码 | Description 介绍           |
 | ---- | ---------------------- |
 | 0    | Success <b>成功</b>                |
-| 1    | Invalid Member ID <b>玩家账号无效</b>          |
 | 2    | Invalid Host ID <b>Host ID 无效</b>          |
 
 <!--
