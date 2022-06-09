@@ -1020,8 +1020,7 @@ title: Try It 尝试
 
 ## Player Rebate Transaction 玩家返利列表
 
-To list out all of the player rebate transactions, the player rebate transaction API is called.<b>列出所有玩家返利交易，将调用玩家返利列表API。</b>
-
+This API will list out all of the player rebate transactions. Operator needs to implement this API for rebate purposes. <b>此 API 将列出所有玩家返利交易。第三方需要实施此API以使用此功能。</b>
 
 <!--
 type: tab
@@ -1030,28 +1029,34 @@ title: Docs 文件
 
 ### Request 请求
 
-| Name 名称 | Type 类型       | Description 介绍                                           |
-| --------- | ---------- | ---------------------------------------------------- |
-| host_id   | string     | Unique ID of Operator System (provided by game provider)<b>第三方的 Host ID (游戏供应商提供)</b> |
-| member_id | string(optional)     | Unique ID / Username of the player<b>玩家用户名/唯一ID</b>                   |
+| Name 名称      | Type 类型   | Description 介绍                                                                          |
+| -------------- | ------ | ----------------------------------------------------------------------------------- |
+| host_id        | string | Unique ID of Operator System (provided by game provider) <b>第三方的 Host ID (游戏供应商提供)</b> |
+| member_id      | string(optional) | Unique ID of the player <b>玩家唯一ID</b> |
+| start_date | string<br>(optional) | Starting date in the format of YYYY-MM-DD, eg. 2020-02-02. Default value is today’s date |
+| end_date | string<br>(optional) | Ending date in the format of YYYY-MM-DD, eg. 2020-02-02. Default value is today’s date |
+| start_time | string<br>(optional) | Starting time in the format of HH:MM:SS, eg. 15:09:59. Default value is 00:00:00 |
+| end_time | string<br>(optional) | Ending time in the format of HH:MM:SS, eg. 15:09:59. Default value is 23:59:59 |
+| page_size | string<br>(optional) | Number of records.<br>记录的数量.
+| key | string<br>(optional) | Unique database index number<br>数据库索引号 |
 
 > ##### Example 例子
 >
-> https://{PROVIDER_API_ENDPOINT}/api/user/player-rebate-transaction?host_id={host_id}&member_id={member_id}
+> https://{OPERATOR_API_ENDPOINT}/api/user/player-rebate-transaction?host_id={host_id}&member_id={member_id}
 
 ### Response 响应
 
-| Name 名称   | Type 类型   | Description 介绍                                  |
-| ----------- | ------ | ------------------------------------------- |
-| status_code       |  int     | Response status code<b>响应状态代码</b> |
-| report            |  array   | A list report<b>报表列表</b> |
+| Name 名称         | Type 类型 | Description  介绍        |
+| -------------- | -------- | -------------------- |
+| status_code    |  int     | Response status code<b>响应状态代码</b> |
+| report         |  array   | A list report <b>报表列表</b>        |
+| key            |  string  | Unique database index number<br>数据库索引号 |
 
 #### Status Code 状态代码
 
-| Code 代码 | Description 介绍                 |
-| ---- | -------------------------- |
+| Code 代码 | Description 介绍           |
+| ---- | ---------------------- |
 | 0    | Success <b>成功</b>                |
-| 1    | Invalid Member ID <b>玩家账号无效</b>          |
 | 2    | Invalid Host ID <b>Host ID 无效</b>          |
 
 <!--
