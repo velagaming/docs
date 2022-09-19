@@ -61,6 +61,7 @@ To be able to connect to our game server, **operator** needs to provide the foll
 - [Player Balance 玩家余额](#player-balance-玩家余额)
 - [Player Rebate Transaction 玩家返利列表](#player-rebate-transaction-玩家返利列表)
 - [Player Rebate Balance 玩家返利余额](#player-rebate-balance-玩家返利余额)
+- [Wallet Transaction Status 钱包交易状态](#wallet-transaction-status-钱包交易状态)
 
 \*\*(O) is referred to API that is required to be develop by operator. <b> \*\*(O) 是指第三方必须开发的API。</b>
 
@@ -1243,6 +1244,100 @@ title: Try It 尝试
     "member_id": "{member_id}",
     "key": "{key}",
     "page_size": "{page_size}"
+  }
+}
+```
+
+<!-- type: tab-end -->
+
+---
+### Wallet Transaction Status 钱包交易状态
+This API will list return the transation status by transaction id.
+
+<!--
+type: tab
+title: Docs 文件
+-->
+
+### Request 请求
+
+| Name 名称      | Type 类型   | Description 介绍                                                                          |
+| -------------- | ------ | ----------------------------------------------------------------------------------- |
+| host_id        | string | Unique ID of Operator System (provided by game provider)<br>第三方的 Host ID (游戏供应商提供)|
+| trans_id       | string | The Unique ID of withdraw/deposit |
+
+> ##### Example 例子
+>
+> https://**{PROVIDER_API_ENDPOINT}**/api/user/wallet-trans-status?host_id=**{host_id}**&trans_id=**{trans_id}**
+
+### Response 响应
+
+| Name 名称   | Type 类型  | Description 介绍           |
+| ----------- | -----     | -------------------- |
+| status_code | int       | Response status code<br>响应状态代码 |
+| username    | string    | Unique ID / Username of the player  |
+| tran_type   | string    | Transaction Type IN or OUT |
+| amount      | uint64    | Total POINTS to be transferred (in Cents) 要转让的总点数 （进位两位数，分钱）|
+| before_balance | uint64    | Total POINTS to be transferred (in Cents) 要转让的总点数 （进位两位数，分钱）|
+| amount_balance | uint64    | Total POINTS to be transferred (in Cents) 要转让的总点数 （进位两位数，分钱）|
+| created_at     | uint64    | Transaction created date time|
+
+#### Status Code 状态代码
+
+| Code 代码 | Description 介绍 |
+| ---- | --------------- |
+| 0    | Success<br>成功 |
+| 1    | Transaction not found <b>未找到交易</b>          |
+| 2    | Invalid Host ID <b>Host ID 无效</b>          |
+
+<!--
+type: tab
+title: Examples 例子
+-->
+
+### Sample Success Response 成功响应例子
+
+```json
+{
+    "data": {
+        "status_code": 0,
+        "username": "124demo01",
+        "tran_type": "OUT",
+        "amount": 2260,
+        "before_balance": 2260,
+        "after_balance": 0,
+        "created_at": "2020-11-28 18:12:18"
+    } 
+}
+
+```
+
+### Sample Error Response 错误响应例子
+
+```json
+{
+  "error": {
+    "status_code": 2,
+    "message": "缺少参数：host_id",
+    "retry": null
+  }
+}
+```
+
+<!--
+type: tab
+title: Try It 尝试
+-->
+**Staging Environment 测试环境**
+<br>
+
+```json http
+{
+  "method": "get",
+  "url": "https://bo-stage.aposcb.org/api/user/wallet-trans-status",
+  "query": {
+    "host_id": "{host_id}",
+    "trans_id": "{trans_id}",
   }
 }
 ```
